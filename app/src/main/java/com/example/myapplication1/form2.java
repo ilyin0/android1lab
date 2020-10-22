@@ -27,8 +27,10 @@ public class form2 extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         TextView textView = (TextView) findViewById(R.id.textView3);
-        int sourceNumber = Integer.parseInt(textView.getText().toString());
-        int number = Integer.parseInt(editText.getText().toString());
+        String stringNumber = editText.getText().toString();
+        int number = stringNumber.isEmpty() ? 0 : Integer.parseInt(stringNumber);
+        String stringSourceNumber = textView.getText().toString();
+        int sourceNumber = stringSourceNumber.isEmpty() ? 0 : Integer.parseInt(stringSourceNumber);
         intent.putExtra("number", number);
         intent.putExtra("sourceNumber", sourceNumber);
         startActivity(intent);
