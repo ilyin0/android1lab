@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void putText(View view) {
-        Intent intent = new Intent(this, form2.class);
+        Intent intent = new Intent(this, SecondActivity.class);
         EditText editText = (EditText) findViewById(R.id.input);
         TextView textView = (TextView) findViewById(R.id.textView2);
         String stringNumber = editText.getText().toString();
