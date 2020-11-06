@@ -1,8 +1,10 @@
 package com.example.myapplication1;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,13 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Intent intent = getIntent();
-        int number = intent.getIntExtra("number", 0);
-        int sourceNumber = intent.getIntExtra("sourceNumber", 0);
-        TextView textView = (TextView) findViewById(R.id.textView2);
-        int sum = number + sourceNumber;
-        textView.setText(String.valueOf(sum));
     }
 
     public void putText(View view) {
@@ -34,7 +29,21 @@ public class MainActivity extends AppCompatActivity {
         int sourceNumber = stringSourceNumber.isEmpty() ? 0 : Integer.parseInt(stringSourceNumber);
         intent.putExtra("number", number);
         intent.putExtra("sourceNumber", sourceNumber);
-        startActivity(intent);
+        startActivityForResult(intent, 10);
+        editText.setText("");
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 10){
+            if(resultCode == Activity.RESULT_OK){
+                int number = data.getIntExtra("number", 0);
+                int sourceNumber = data.getIntExtra("sourceNumber", 0);
+                TextView textView = (TextView) findViewById(R.id.textView2);
+                int sum = number + sourceNumber;
+                textView.setText(String.valueOf(sum));
+            }
+        }
+    }
 }
